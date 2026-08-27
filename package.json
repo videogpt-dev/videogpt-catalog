@@ -1,0 +1,16 @@
+{
+  "name": "@videogpt/catalog",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "files": [
+    "catalog.json",
+    "definitions",
+    "schemas"
+  ],
+  "exports": {
+    "./catalog": "./catalog.json",
+    "./schemas/catalog": "./schemas/catalog.schema.json",
+    "./schemas/definition": "./schemas/definition.schema.json"
+  }
+}

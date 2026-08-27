@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://videogpt.dev/schemas/catalog/v1/catalog.schema.json",
+  "title": "VideoGPT definition catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "version",
+    "engine",
+    "definitions"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "engine": {
+      "$ref": "#/$defs/engineCompatibility"
+    },
+    "definitions": {
+      "type": "array",
+      "items": {
+        "$ref": "definition.schema.json"
+      }
+    }
+  },
+  "$defs": {
+    "engineCompatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minimum"
+      ],
+      "properties": {
+        "minimum": {
+          "type": "string",
+          "minLength": 1
+        },
+        "maximum_exclusive": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

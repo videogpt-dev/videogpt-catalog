@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://videogpt.dev/schemas/catalog/v1/definition.schema.json",
+  "title": "VideoGPT catalog definition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "subtype",
+    "key",
+    "name",
+    "category",
+    "body",
+    "extras"
+  ],
+  "properties": {
+    "type": {
+      "enum": [
+        "screenwriter",
+        "agent",
+        "preset",
+        "fragment"
+      ]
+    },
+    "subtype": {
+      "type": "string",
+      "maxLength": 32
+    },
+    "key": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "category": {
+      "type": "string",
+      "maxLength": 64
+    },
+    "body": {
+      "type": "string",
+      "maxLength": 10000
+    },
+    "extras": {
+      "type": "object"
+    },
+    "editable": {
+      "type": "boolean",
+      "default": false
+    },
+    "visible": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "screenwriter"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "extras": {
+            "$ref": "#/$defs/screenwriterExtras"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "screenwriterExtras": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "persona",
+        "stages"
+      ],
+      "properties": {
+        "persona": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 10000
+        },
+        "stages": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/stage"
+          }
+        }
+      }
+    },
+    "stage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role",
+        "instructions",
+        "format",
+        "temperature"
+      ],
+      "properties": {
+        "role": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "instructions": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 10000
+        },
+        "format": {
+          "enum": [
+            "text",
+            "story_json"
+          ]
+        },
+        "provider": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "temperature": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "max_output_tokens": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    }
+  }
+}
