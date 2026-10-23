@@ -1,5 +1,9 @@
 # @videogpt/catalog
 
+[![Website](https://img.shields.io/badge/website-videogpt.dev-7c3aed)](https://videogpt.dev)
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![Last commit](https://img.shields.io/github/last-commit/videogpt-dev/videogpt-catalog)](https://github.com/videogpt-dev/videogpt-catalog/commits/main)
+
 This package is just data, not service. It has no database, HTTP API, queue, or execution code.
 
 [Kinoforge](https://github.com/videogpt-dev/kinoforge) does not import it. Runtime resolve catalog definitions, then call Kinoforge through REST.
