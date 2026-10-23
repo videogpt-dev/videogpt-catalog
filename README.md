@@ -34,5 +34,6 @@ and optional output-token limit.
 `catalog.json` is empty until approved community definitions are exported or authored. Existing
 cloud system rows and temporary Kinoforge clip prompts are not public automatically.
 
-Package stays private inside monorepo until catalog license and standalone public repository are
-ready.
+## License
+
+[MIT](LICENSE).
